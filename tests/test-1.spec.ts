@@ -1,9 +1,52 @@
 import { test, expect } from '@playwright/test';
 
 test('test', async ({ page }) => {
-  await page.goto('https://www.google.com/');
-  try{
-    await page.locator("//div[contains(text(), 'Accept')]").last().click();
-  }catch(error){}
+  await page.goto('https://demo.playwright.dev/todomvc/');
+  await page.goto('https://demo.playwright.dev/todomvc/#/');
+  await page.locator('html').click();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByPlaceholder('What needs to be done?').fill('itro');
+  await page.getByPlaceholder('What needs to be done?').press('Enter');
+  await page.getByLabel('Toggle Todo').check();
+  await page.getByRole('link', { name: 'Active' }).click();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByPlaceholder('What needs to be done?').fill('troto');
+  await page.getByRole('link', { name: 'Completed' }).click();
+  await page.getByRole('link', { name: 'All' }).click();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByPlaceholder('What needs to be done?').press('Enter');
+  await page.locator('li').filter({ hasText: 'troto' }).getByLabel('Toggle Todo').check();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByText('troto').click();
+  await page.locator('li').filter({ hasText: 'troto' }).getByLabel('Toggle Todo').uncheck();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByPlaceholder('What needs to be done?').fill('micro');
+  await page.getByPlaceholder('What needs to be done?').press('Enter');
+  await page.getByRole('link', { name: 'Completed' }).click();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByTestId('todo-title').click();
+  await page.getByText('All Active Completed').click();
+  await page.getByRole('link', { name: 'All' }).click();
+  await page.getByText('troto').click();
+  await page.locator('li').filter({ hasText: 'troto' }).getByLabel('Toggle Todo').check();
+  await page.getByRole('button', { name: 'Clear completed' }).click();
+  await page.getByRole('link', { name: 'Active' }).click();
+  await page.getByRole('link', { name: 'All' }).click();
+  await page.getByTestId('todo-title').click();
+  await page.getByPlaceholder('What needs to be done?').click();
+  await page.getByPlaceholder('What needs to be done?').fill('trombo');
+  await page.getByPlaceholder('What needs to be done?').press('Enter');
+  await page.getByPlaceholder('What needs to be done?').fill('add');
+  await page.getByPlaceholder('What needs to be done?').press('Enter');
+  await page.locator('li').filter({ hasText: 'micro' }).getByLabel('Toggle Todo').check();
+  await page.getByText('2 items leftAll Active').click();
+  await page.getByRole('link', { name: 'Completed' }).click();
+  await page.getByRole('link', { name: 'Active' }).click();
+  await page.getByRole('button', { name: 'Clear completed' }).click();
+  await page.getByRole('link', { name: 'Completed' }).click();
+  await page.getByRole('link', { name: 'Active' }).click();
+  await page.getByRole('link', { name: 'Active' }).click();
+  await page.getByRole('link', { name: 'Completed' }).click();
   await page.close();
 });
