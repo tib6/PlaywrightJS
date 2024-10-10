@@ -405,7 +405,6 @@ test.describe('Routing', () => {
 
     // Page change - completed items.
     await expect(completedLink).toHaveClass('selected');
-    await page.close();
   });
 });
 
